@@ -1,0 +1,54 @@
+version: "3.6"
+services:
+  api:
+    image: app-cars-api
+    build: ./
+    container_name: app-cars-api
+    tty: true
+    volumes:
+      - ./:/usr/src
+    working_dir: /usr/src/
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          memory: 1000M
+    restart: always
+    ports:
+      - "3000:3000"
+
+    environment:
+      - PORT=3000
+      - DATABASE_HOST=database
+      - DATABASE_NAME=main
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=1234567
+      - DATABASE_PORT=3306
+      - APP_ENVIROMENT_STAGE=dev
+      - AWS_ACCESS_KEY_ID=AKIAV26ZLECMKHOF3HTJ
+      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_BUCKET_NAME=te-empresto-development-storage
+    networks:
+      - app-network
+  database:
+    container_name: database
+    build: ./database/
+    tty: true
+    ports:
+      - "3306:3306"
+    restart: always
+    volumes:
+      - ./database/data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=main
+      - MYSQL_ROOT_PASSWORD=1234567
+      # - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    deploy:
+      resources:
+        limits:
+          memory: 500M
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
