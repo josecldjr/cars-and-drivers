@@ -2,6 +2,7 @@ import { Repository } from "typeorm"
 import { getMockDriver } from "../../../test/utils/mock-data.utils"
 import { Driver } from "../../entity/driver.entity"
 import { DriverService } from "./driver.service"
+import { SearchDriversDTO } from "./dto/search-drivers.dto"
 import { DriverModuleMessages } from "./messages.enum"
 
 describe('DriverService', () => {
@@ -116,6 +117,50 @@ describe('DriverService', () => {
 
             expect(errorCode).toBe(404)
             expect(errorMessage).toBe(DriverModuleMessages.driverNotFound)
+        })
+    })
+
+    describe('search', async () => {
+
+        const driverRepository = new Repository<Driver>()
+        const driverService = new DriverService(driverRepository)
+
+        let spyFindAndCount: jest.SpyInstance
+
+        beforeEach(() => {
+            spyFindAndCount = jest.spyOn(driverRepository, 'findAndCount')
+        })
+
+        afterEach(() => {
+            spyFindAndCount.mockClear()
+        })
+
+
+        it('in case of successful search', async () => {
+
+            const mockList = [getMockDriver(), getMockDriver(), getMockDriver(), getMockDriver(), getMockDriver(),]
+            const mockTotalResults = 1000
+
+            spyFindAndCount.mockResolvedValue([mockList, mockTotalResults])
+
+            const data: SearchDriversDTO[] = [
+                { searchText: '' },
+                { page: 1, pageSize: 10 },
+                { page: 1, pageSize: 25, searchText: 'lasdlas' },
+                {},
+            ]
+
+            const results = await Promise.all(data.map(currentData => driverService.search(currentData)))
+
+            expect(spyFindAndCount).toHaveBeenCalledTimes(data.length)
+
+            // it should always return the resulting of the findAndCount method
+            results.forEach(result => {
+                expect(result.list).toEqual(mockList)
+                expect(result.totalResults).toBe(mockTotalResults)
+
+            })
+
         })
     })
 })

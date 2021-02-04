@@ -1,10 +1,13 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { FindConditions, Like, Repository } from "typeorm";
+import { GenericSerchReturnDTO } from "../../commom/dto/generic-search.dto";
+import { handlePagination } from "../../commom/utils/query.utils";
+import { defaultPageSize, defautlInitialPage } from "../../config/constants";
 import { Driver } from "../../entity/driver.entity";
 import { SaveDriverDTO } from "./dto/save-drive.dto";
+import { SearchDriversDTO } from "./dto/search-drivers.dto";
 import { DriverModuleMessages } from "./messages.enum";
-
 
 /**
  * Handl operations related to Drivers
@@ -52,5 +55,37 @@ export class DriverService {
 
         return driver
 
+    }
+
+    /**
+     * Return a list of Drivers 
+     * @param filters 
+     */
+    async search(filters: SearchDriversDTO): Promise<GenericSerchReturnDTO<Driver>> {
+        const {
+            page = defautlInitialPage,
+            pageSize = defaultPageSize,
+            searchText,
+        } = filters
+
+        const where: FindConditions<Driver> = {}
+
+        if (searchText) {
+            where.name = Like(`%${searchText}%`)
+        }
+
+        const { skip, take } = handlePagination(page, pageSize)
+
+        const [list, totalResults] = await this.driverRepository.findAndCount({
+            where,
+            order: { name: 'ASC' },
+            skip,
+            take,
+        })
+
+        return {
+            list,
+            totalResults,
+        }
     }
 }
