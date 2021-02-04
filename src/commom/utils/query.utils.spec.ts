@@ -1,5 +1,5 @@
+import { defaultPageSize, defautlInitialPage } from "../../config/constants"
 import { handlePagination } from "./query.utils"
-
 
 describe('query.utils', () => {
 
@@ -20,6 +20,14 @@ describe('query.utils', () => {
 
             expect(skip).toBe(200)
             expect(take).toBe(100)
+        })
+
+        it('negative numbers', async () => {
+
+            const { skip, take } = handlePagination(-1, -1)
+
+            expect(skip).toBe((defautlInitialPage - 1) * defaultPageSize)
+            expect(take).toBe(defaultPageSize)
         })
     })
 })

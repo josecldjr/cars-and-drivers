@@ -88,4 +88,12 @@ export class DriverService {
             totalResults,
         }
     }
+
+    /**
+     * Delete a driver (logical exclusion)
+     * @param driverId 
+     */
+    async delete(driverId: number): Promise<void> {
+        await this.driverRepository.softDelete(driverId)
+    }
 }

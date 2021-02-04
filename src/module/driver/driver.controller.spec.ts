@@ -1,4 +1,6 @@
 import { getMockDriver } from '../../../test/utils/mock-data.utils';
+import { GenericSerchReturnDTO } from '../../commom/dto/generic-search.dto';
+import { Driver } from '../../entity/driver.entity';
 import { DriverController } from './driver.controller';
 import { DriverService } from './driver.service';
 
@@ -44,4 +46,59 @@ describe('DriverController', () => {
 
 
   })
-});
+
+
+  describe('search', () => {
+
+    const driverService = new DriverService(null as any)
+    const driverController = new DriverController(driverService)
+    let spySearch: jest.SpyInstance
+
+    beforeEach(() => {
+      spySearch = jest.spyOn(driverService, 'search')
+
+    })
+
+    afterEach(() => {
+      spySearch.mockClear()
+    })
+
+    it('success', async () => {
+      const expectedResult: GenericSerchReturnDTO<Driver> = {
+        list: [await getMockDriver(), await getMockDriver()],
+        totalResults: 100,
+      }
+
+      spySearch.mockResolvedValue(expectedResult)
+      const result = await driverController.search({})
+
+      expect(result).toEqual(expectedResult)
+
+    })
+  })
+
+  describe('delete', () => {
+    const driverService = new DriverService(null as any)
+    const driverController = new DriverController(driverService)
+
+    let spyDelete: jest.SpyInstance
+
+    beforeEach(() => {
+      spyDelete = jest.spyOn(driverService, 'delete')
+    })
+
+    afterEach(() => {
+      spyDelete.mockClear()
+    })
+
+    it('success', async () => {
+
+      spyDelete.mockImplementation(() => { })
+
+      await driverController.delete(1)
+
+      expect(spyDelete).toBeCalled()
+    })
+
+  })
+})

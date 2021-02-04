@@ -120,7 +120,7 @@ describe('DriverService', () => {
         })
     })
 
-    describe('search', async () => {
+    describe('search', () => {
 
         const driverRepository = new Repository<Driver>()
         const driverService = new DriverService(driverRepository)
@@ -162,5 +162,30 @@ describe('DriverService', () => {
             })
 
         })
+    })
+
+    describe('delete', () => {
+        const driverRepository = new Repository<Driver>()
+        const driverService = new DriverService(driverRepository)
+
+        let spySoftdelete: jest.SpyInstance
+
+        beforeEach(() => {
+            spySoftdelete = jest.spyOn(driverRepository, 'softDelete')
+        })
+
+        afterEach(() => {
+            spySoftdelete.mockClear()
+        })
+
+        it('success', async () => {
+
+            spySoftdelete.mockImplementation(() => { })
+
+            await driverService.delete(1)
+
+            expect(spySoftdelete).toHaveBeenCalled()
+        })
+
     })
 })

@@ -1,4 +1,4 @@
-
+import { defaultPageSize, defautlInitialPage } from "../../config/constants"
 
 /**
  * "Translate" pagination rule to database equivalent
@@ -6,8 +6,16 @@
  * @param pageSize 
  */
 export function handlePagination(page: number | string, pageSize: number | string): { take: number, skip: number } {
-    const _page = parseInt(page.toString())
-    const _pageSize = parseInt(pageSize.toString())
+    let _page = parseInt(page.toString())
+    let _pageSize = parseInt(pageSize.toString())
+
+    if (_page <= 0) {
+        _page = defautlInitialPage
+    }
+
+    if (_pageSize <= 0) {
+        _pageSize = defaultPageSize
+    }
 
     return {
         skip: (_page - 1) * _pageSize,
