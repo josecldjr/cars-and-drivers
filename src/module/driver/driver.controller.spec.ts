@@ -101,4 +101,31 @@ describe('DriverController', () => {
     })
 
   })
+
+  describe('get', () => {
+    const driverService = new DriverService(null as any)
+    const driverController = new DriverController(driverService)
+
+    let spyGet: jest.SpyInstance
+
+    beforeEach(() => {
+      spyGet = jest.spyOn(driverService, 'get')
+    })
+
+    afterEach(() => {
+      spyGet.mockClear()
+    })
+
+    it('success', async () => {
+      const expectedResult = await getMockDriver()
+
+      spyGet.mockResolvedValue(expectedResult)
+
+      const result = await driverController.get(1)
+
+      expect(spyGet).toHaveBeenCalled()
+      expect(result).toEqual(expectedResult)
+    })
+
+  })
 })

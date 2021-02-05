@@ -28,8 +28,13 @@ export class DriverController {
     }
 
     @Delete('/:driverId')
-    delete(@Param('driverId') driverId: number): Promise<void> {
+    delete(@Param('driverId', ParseIntPipe) driverId: number): Promise<void> {
         return this.driverService.delete(driverId)
+    }
+
+    @Get('/:driverId')
+    get(@Param('driverId', ParseIntPipe) driverId: number): Promise<Driver> {
+        return this.driverService.get(driverId)
     }
 
 }
