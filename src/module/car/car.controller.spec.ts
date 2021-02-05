@@ -76,3 +76,31 @@ describe('CarController', () => {
 
   })
 });
+
+
+describe('get', () => {
+
+  const carService = new CarService(null as any)
+  const carController = new CarController(carService)
+
+  let spyGet: jest.SpyInstance
+
+  beforeEach(() => {
+    spyGet = jest.spyOn(carService, 'get')
+  })
+
+  afterEach(() => {
+    spyGet.mockClear()
+  })
+
+  it('success', async () => {
+    const expecterResult = await getMockCar()
+
+    spyGet.mockResolvedValue(expecterResult)
+
+    const result = await carController.get(1)
+
+    expect(spyGet).toBeCalled()
+    expect(result).toEqual(expecterResult)
+  })
+})

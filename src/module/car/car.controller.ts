@@ -26,4 +26,9 @@ export class CarController {
     search(@Query() filters: SearchCarRequestDTO): Promise<GenericSerchReturnDTO<Car>> {
         return this.carService.search(filters)
     }
+
+    @Get('/:carId')
+    get(@Param('carId', ParseIntPipe) carId: number) {
+        return this.carService.get(carId, true)
+    }
 }
