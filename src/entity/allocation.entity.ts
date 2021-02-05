@@ -1,7 +1,6 @@
 import { CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import { Driver } from "./driver.entity"
-import { Vehicle } from "./vehicle.entity"
-
+import { Car } from "./car.entity"
 
 /**
  * Allocation entity
@@ -20,8 +19,8 @@ export class Allocation {
     @DeleteDateColumn()
     deletedAt: Date
 
-    @ManyToOne(() => Vehicle, { nullable: false })
-    vehicle: Vehicle
+    @ManyToOne(() => Car, { nullable: false })
+    vehicle: Car
 
     @JoinColumn()
     vehicleId: number

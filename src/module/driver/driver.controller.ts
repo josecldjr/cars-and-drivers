@@ -34,7 +34,7 @@ export class DriverController {
 
     @Get('/:driverId')
     get(@Param('driverId', ParseIntPipe) driverId: number): Promise<Driver> {
-        return this.driverService.get(driverId)
+        return this.driverService.get(driverId, true)
     }
 
 }

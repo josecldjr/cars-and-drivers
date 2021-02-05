@@ -3,7 +3,7 @@ import { getMockDriver } from "../../../test/utils/mock-data.utils"
 import { Driver } from "../../entity/driver.entity"
 import { DriverService } from "./driver.service"
 import { SearchDriversDTO } from "./dto/search-drivers.dto"
-import { DriverModuleMessages } from "./messages.enum"
+import { DriverModuleMessages } from "../../commom/enum/driver-messages.enum"
 
 describe('DriverService', () => {
 

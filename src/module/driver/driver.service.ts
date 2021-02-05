@@ -2,12 +2,12 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindConditions, Like, Repository } from "typeorm";
 import { GenericSerchReturnDTO } from "../../commom/dto/generic-search.dto";
+import { DriverModuleMessages } from "../../commom/enum/driver-messages.enum";
 import { handlePagination } from "../../commom/utils/query.utils";
 import { defaultPageSize, defautlInitialPage } from "../../config/constants";
 import { Driver } from "../../entity/driver.entity";
 import { SaveDriverDTO } from "./dto/save-drive.dto";
 import { SearchDriversDTO } from "./dto/search-drivers.dto";
-import { DriverModuleMessages } from "./messages.enum";
 
 /**
  * Handl operations related to Drivers
@@ -44,7 +44,7 @@ export class DriverService {
     /**
      * Return a single driver by its Id
      * @param driverId 
-     * @param allowErrorThrow thron a exception instead of returning undefined
+     * @param allowErrorThrow throw a exception instead of returning undefined
      */
     async get(driverId: number, allowErrorThrow = false): Promise<Driver | undefined> {
         const driver = await this.driverRepository.findOne(driverId)
@@ -58,7 +58,7 @@ export class DriverService {
     }
 
     /**
-     * Return a list of Drivers 
+     * Return a list of Drivers considering the given filters
      * @param filters 
      */
     async search(filters: SearchDriversDTO): Promise<GenericSerchReturnDTO<Driver>> {
