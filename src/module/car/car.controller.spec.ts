@@ -75,32 +75,60 @@ describe('CarController', () => {
     })
 
   })
+
+
+  describe('get', () => {
+
+    const carService = new CarService(null as any)
+    const carController = new CarController(carService)
+
+    let spyGet: jest.SpyInstance
+
+    beforeEach(() => {
+      spyGet = jest.spyOn(carService, 'get')
+    })
+
+    afterEach(() => {
+      spyGet.mockClear()
+    })
+
+    it('success', async () => {
+      const expecterResult = await getMockCar()
+
+      spyGet.mockResolvedValue(expecterResult)
+
+      const result = await carController.get(1)
+
+      expect(spyGet).toBeCalled()
+      expect(result).toEqual(expecterResult)
+    })
+  })
 });
 
 
-describe('get', () => {
+
+
+describe('delete', () => {
 
   const carService = new CarService(null as any)
   const carController = new CarController(carService)
 
-  let spyGet: jest.SpyInstance
+  let spyDelete: jest.SpyInstance
 
   beforeEach(() => {
-    spyGet = jest.spyOn(carService, 'get')
+    spyDelete = jest.spyOn(carService, 'delete')
   })
 
   afterEach(() => {
-    spyGet.mockClear()
+    spyDelete.mockClear()
   })
 
   it('success', async () => {
-    const expecterResult = await getMockCar()
+    spyDelete.mockImplementation(() => { })
 
-    spyGet.mockResolvedValue(expecterResult)
+    await carController.delete(1)
 
-    const result = await carController.get(1)
-
-    expect(spyGet).toBeCalled()
-    expect(result).toEqual(expecterResult)
+    expect(spyDelete).toBeCalled()
   })
+
 })

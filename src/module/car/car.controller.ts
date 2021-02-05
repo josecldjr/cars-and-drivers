@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Inject, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { GenericSerchReturnDTO } from '../../commom/dto/generic-search.dto';
 import { Car } from '../../entity/car.entity';
 import { CarService } from './car.service';
@@ -13,22 +13,27 @@ export class CarController {
     ) { }
 
     @Post()
-    create(@Body() data: SaveCarResquestDTO): Promise<Car> {
+    async create(@Body() data: SaveCarResquestDTO): Promise<Car> {
         return this.carService.save(data)
     }
 
     @Put('/:driverId')
-    update(@Param('driverId', ParseIntPipe) driverId: number, @Body() data: SaveCarResquestDTO): Promise<Car> {
+    async update(@Param('driverId', ParseIntPipe) driverId: number, @Body() data: SaveCarResquestDTO): Promise<Car> {
         return this.carService.save(data, driverId)
     }
 
     @Get()
-    search(@Query() filters: SearchCarRequestDTO): Promise<GenericSerchReturnDTO<Car>> {
+    async search(@Query() filters: SearchCarRequestDTO): Promise<GenericSerchReturnDTO<Car>> {
         return this.carService.search(filters)
     }
 
     @Get('/:carId')
-    get(@Param('carId', ParseIntPipe) carId: number) {
+    async get(@Param('carId', ParseIntPipe) carId: number): Promise<Car> {
         return this.carService.get(carId, true)
+    }
+
+    @Delete('/:carId')
+    async delete(@Param('carId', ParseIntPipe) carId: number): Promise<void> {
+        await this.carService.delete(carId)
     }
 }

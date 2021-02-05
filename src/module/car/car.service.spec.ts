@@ -169,4 +169,29 @@ describe('CarService', () => {
 
         })
     })
+
+    describe('delete', () => {
+
+        const carRepository = new Repository<Car>()
+        const carService = new CarService(carRepository)
+
+        let spySoftDelete: jest.SpyInstance
+
+        beforeEach(() => {
+            spySoftDelete = jest.spyOn(carRepository, 'softDelete')
+        })
+
+        afterEach(() => {
+            spySoftDelete.mockClear()
+        })
+
+        it('delete', async () => {
+
+            spySoftDelete.mockImplementation(() => { })
+
+            await carService.delete(1)
+
+            expect(spySoftDelete).toBeCalled()
+        })
+    })
 })

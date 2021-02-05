@@ -91,4 +91,13 @@ export class CarService {
             totalResults,
         }
     }
+
+
+    /**
+     * Delete a car (logical exclusion)
+     * @param carId 
+     */
+    async delete(carId: number): Promise<void> {
+        await this.carRepository.softDelete(carId)
+    }
 }
