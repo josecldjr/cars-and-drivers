@@ -160,7 +160,7 @@ describe('CarService', () => {
 
             const results = await Promise.all(inputs.map(input => carService.search(input)))
 
-            expect(spyFindAndCount).toBeCalled()
+            expect(spyFindAndCount).toHaveBeenCalledTimes(inputs.length)
 
             results.forEach(result => {
                 expect(expectResultList).toEqual(result.list)

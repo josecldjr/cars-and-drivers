@@ -32,7 +32,7 @@ export class CarService {
 
         car.brand = brand
         car.color = color
-        car.licencePlate = licencePlate
+        car.licencePlate = licencePlate.toUpperCase()
 
         try {
             return await this.carRepository.save(car)
@@ -67,15 +67,15 @@ export class CarService {
         const where: FindConditions<Car> = {}
 
         if (brand) {
-            where.brand = Like(`%${brand}$`)
+            where.brand = Like(`%${brand}%`)
         }
 
         if (color) {
-            where.brand = Like(`%${color}$`)
+            where.color = Like(`%${color}%`)
         }
 
         if (licencePlate) {
-            where.brand = Like(`%${licencePlate}$`)
+            where.licencePlate = Like(`%${licencePlate}%`)
         }
 
         const { skip, take } = handlePagination(page, pageSize)
