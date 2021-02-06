@@ -1,18 +1,33 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { getMockAllocation } from '../../../test/utils/mock-data.utils';
 import { AllocationController } from './allocation.controller';
+import { AllocationService } from './allocation.service';
 
 describe('AllocationController', () => {
-  let controller: AllocationController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [AllocationController],
-    }).compile();
+  describe('allocate', () => {
+    const allocationService = new AllocationService(null as any, null as any, null as any)
+    const allocationController = new AllocationController(allocationService)
 
-    controller = module.get<AllocationController>(AllocationController);
-  });
+    let spyAllocate: jest.SpyInstance
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
+    beforeEach(() => {
+      spyAllocate = jest.spyOn(allocationService, 'allocateCar')
+
+    })
+
+    afterEach(() => {
+      spyAllocate.mockClear()
+    })
+
+    it('success', async () => {
+      const expectedResult = await getMockAllocation()
+
+      spyAllocate.mockResolvedValue(expectedResult)
+
+      const result = await allocationController.allocateCar({ carId: 1, driverId: 1, observation: 'askodkas' })
+
+      expect(spyAllocate).toBeCalled()
+      expect(result).toEqual(expectedResult)
+    })
+  })
 });

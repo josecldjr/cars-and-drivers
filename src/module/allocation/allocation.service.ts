@@ -1,6 +1,7 @@
 import { BadRequestException, Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { IsNull, Repository } from "typeorm";
+import { GenericSerchReturnDTO } from "../../commom/dto/generic-search.dto";
 import { CarMessages } from "../../commom/enum/car-messages.enum";
 import { DriverModuleMessages } from "../../commom/enum/driver-messages.enum";
 import { maximumCarsAllowed } from "../../config/constants";
@@ -61,7 +62,7 @@ export class AllocationService {
         return !Boolean(await this.allocationRepository.count({
             where: {
                 carId,
-                endDate: IsNull()
+                endDate: 'IS NULL'
             }
         }))
     }
@@ -71,11 +72,23 @@ export class AllocationService {
      * @param driverId 
      */
     async checkDriverAllocatedCars(driverId: number): Promise<number> {
+        console.log(await this.allocationRepository.count({
+            where: {
+                driverId,
+                endDate: IsNull()
+            }
+        }));
+
         return this.allocationRepository.count({
             where: {
-                driverId
+                driverId,
+                endDate: IsNull()
             }
         })
+    }
+
+    async search(data): Promise<GenericSerchReturnDTO<Allocation>> {
+        return null as any
     }
 
 }
