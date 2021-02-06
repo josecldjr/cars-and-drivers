@@ -7,6 +7,7 @@ import { Allocation } from "../../entity/allocation.entity"
 import { CarService } from "../car/car.service"
 import { DriverService } from "../driver/driver.service"
 import { AllocationService } from "./allocation.service"
+import { SearchAllocationRequestDTO } from "./dto/search-allocations.dto"
 
 describe('AllocationService', () => {
 
@@ -69,7 +70,7 @@ describe('AllocationService', () => {
             const randomInt = () => Math.trunc(Math.random() * 99)
             const expectedValue = randomInt()
 
-            spyCount.mockResolvedValueOnce(expectedValue)
+            spyCount.mockResolvedValue(expectedValue)
 
             const result = await allocationService.checkDriverAllocatedCars(1)
 
@@ -131,7 +132,6 @@ describe('AllocationService', () => {
                 await allocationService.allocateCar(1, 1, 'observation')
 
             } catch (error) {
-                console.log(error);
 
                 errorMessage = error.message
                 errorCode = error.status
@@ -161,7 +161,6 @@ describe('AllocationService', () => {
                 await allocationService.allocateCar(1, 1, 'observation')
 
             } catch (error) {
-                console.log(error);
 
                 errorMessage = error.message
                 errorCode = error.status
@@ -197,6 +196,50 @@ describe('AllocationService', () => {
             expect(spyCheckDriverAllocatedCars).toBeCalled()
             expect(spySave).toBeCalled()
             expect(result).toEqual({ ...mockAllocation, car: mockCar, driver: mockDriver })
+        })
+
+    })
+
+    describe('search', () => {
+        const allocationRepository = new Repository<Allocation>()
+        const allocationService = new AllocationService(allocationRepository, null, null)
+
+        let spyFindAndCount: jest.SpyInstance
+
+        beforeEach(() => {
+            spyFindAndCount = jest.spyOn(allocationRepository, 'findAndCount')
+        })
+
+        afterEach(() => {
+            spyFindAndCount.mockClear()
+        })
+        it('success | test with many filters', async () => {
+
+            const expectedResultList = [await getMockAllocation(), await getMockAllocation(), await getMockAllocation()]
+            const expectedResultTotal = 32
+
+            spyFindAndCount.mockResolvedValue([expectedResultList, expectedResultTotal])
+
+            const inputs: SearchAllocationRequestDTO[] = [
+                { activeOnly: true, carId: 1, driverId: 1, page: 1, pageSize: 20 },
+                { activeOnly: true },
+                { activeOnly: false },
+                { carId: 1, },
+                { driverId: 1, },
+                { page: 1 },
+                { pageSize: 20 },
+                { page: 1, pageSize: 20 },
+                {},
+            ]
+
+            const results = await Promise.all(inputs.map(input => allocationService.search(input)))
+
+            expect(spyFindAndCount).toBeCalledTimes(inputs.length)
+            results.forEach(result => {
+                expect(result.list).toEqual(expectedResultList)
+                expect(result.totalResults).toBe(expectedResultTotal)
+            })
+
         })
 
     })
