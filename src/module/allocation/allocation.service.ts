@@ -1,7 +1,8 @@
-import { BadRequestException, Inject, Injectable } from "@nestjs/common";
+import { BadRequestException, Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Equal, FindConditions, IsNull, Like, Not, Repository } from "typeorm";
+import { FindConditions, IsNull, Not, Repository } from "typeorm";
 import { GenericSerchReturnDTO } from "../../commom/dto/generic-search.dto";
+import { AllocationMessages } from "../../commom/enum/allocation-message.enum";
 import { CarMessages } from "../../commom/enum/car-messages.enum";
 import { DriverModuleMessages } from "../../commom/enum/driver-messages.enum";
 import { handlePagination } from "../../commom/utils/query.utils";
@@ -91,6 +92,10 @@ export class AllocationService {
         })
     }
 
+    /**
+     * Returns a list of allocations using the given filters
+     * @param data 
+     */
     async search(data: SearchAllocationRequestDTO): Promise<GenericSerchReturnDTO<Allocation>> {
         const {
             activeOnly,
@@ -131,6 +136,19 @@ export class AllocationService {
         return {
             list,
             totalResults,
+        }
+    }
+
+    /**
+     * FInalize an allocation
+     * @param allocationId 
+     */
+    async finalizeAllocation(allocationId: number): Promise<void> {
+
+        const affected = (await this.allocationRepository.update(allocationId, { endDate: new Date() })).affected
+
+        if (!affected) {
+            throw new NotFoundException(AllocationMessages.allocationNotFound)
         }
     }
 

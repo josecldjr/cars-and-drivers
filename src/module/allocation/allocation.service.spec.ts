@@ -1,5 +1,6 @@
 import { Repository } from "typeorm"
 import { getMockAllocation, getMockCar, getMockDriver } from "../../../test/utils/mock-data.utils"
+import { AllocationMessages } from "../../commom/enum/allocation-message.enum"
 import { CarMessages } from "../../commom/enum/car-messages.enum"
 import { DriverModuleMessages } from "../../commom/enum/driver-messages.enum"
 import { maximumCarsAllowed } from "../../config/constants"
@@ -242,5 +243,48 @@ describe('AllocationService', () => {
 
         })
 
+    })
+
+    describe('finalizeAllocation', () => {
+
+        const allocationRepository = new Repository<Allocation>()
+        const allocationService = new AllocationService(allocationRepository, null as any, null as any)
+
+        let spyUpdate: jest.SpyInstance
+
+        beforeEach(() => {
+            spyUpdate = jest.spyOn(allocationRepository, 'update')
+        })
+
+        afterEach(() => {
+            spyUpdate.mockClear()
+        })
+
+        it('no rows affected', async () => {
+            let errorCode = 0
+            let errorMessage = ''
+
+            spyUpdate.mockResolvedValue({ affected: 0 })
+
+            try {
+                await allocationService.finalizeAllocation(1)
+            } catch (error) {
+                errorCode = error.status
+                errorMessage = error.message
+            }
+
+            expect(spyUpdate).toBeCalled()
+            expect(errorCode).toBe(404)
+            expect(errorMessage).toBe(AllocationMessages.allocationNotFound)
+        })
+
+
+        it('success', async () => {
+            spyUpdate.mockResolvedValue({ affected: 1 })
+
+            await allocationService.finalizeAllocation(1)
+
+            expect(spyUpdate).toBeCalled()
+        })
     })
 })

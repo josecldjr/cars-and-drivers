@@ -62,4 +62,29 @@ describe('AllocationController', () => {
       expect(result).toEqual(expectedResult)
     })
   })
+
+  describe('finalize', () => {
+    const allocationService = new AllocationService(null as any, null as any, null as any)
+    const allocationController = new AllocationController(allocationService)
+
+    let spyFinalize: jest.SpyInstance
+
+    beforeEach(() => {
+      spyFinalize = jest.spyOn(allocationService, 'finalizeAllocation')
+
+    })
+
+    afterEach(() => {
+      spyFinalize.mockClear()
+    })
+
+    it('success', async () => {
+
+      spyFinalize.mockImplementation(() => { })
+
+      await allocationController.finalize(1)
+
+      expect(spyFinalize).toBeCalled()
+    })
+  })
 });

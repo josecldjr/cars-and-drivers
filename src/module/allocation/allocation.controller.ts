@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { GenericSerchReturnDTO } from '../../commom/dto/generic-search.dto';
 import { Allocation } from '../../entity/allocation.entity';
 import { AllocationService } from './allocation.service';
@@ -21,4 +21,10 @@ export class AllocationController {
     async search(@Query() filters: SearchAllocationRequestDTO): Promise<GenericSerchReturnDTO<Allocation>> {
         return this.allocationService.search(filters)
     }
+
+    @Patch(':allocationId')
+    async finalize(@Param('allocationId', ParseIntPipe) allocationId: number): Promise<void> {
+        await this.allocationService.finalizeAllocation(allocationId)
+    }
+
 }
