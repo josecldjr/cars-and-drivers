@@ -8,5 +8,6 @@ import { DriverService } from './driver.service';
   controllers: [DriverController],
   imports: [TypeOrmModule.forFeature([Driver])],
   providers: [DriverService],
+  exports: [DriverService]
 })
 export class DriverModule { }
