@@ -25,9 +25,6 @@ services:
       - DATABASE_PASSWORD=1234567
       - DATABASE_PORT=3306
       - APP_ENVIROMENT_STAGE=dev
-      - AWS_ACCESS_KEY_ID=AKIAV26ZLECMKHOF3HTJ
-      - AWS_SECRET_ACCESS_KEY=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
-      - AWS_BUCKET_NAME=te-empresto-development-storage
     networks:
       - app-network
   database:
@@ -37,6 +34,7 @@ services:
     ports:
       - "3306:3306"
     restart: always
+
     volumes:
       - ./database/data:/var/lib/mysql
     environment:

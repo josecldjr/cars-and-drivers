@@ -3,13 +3,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { connection } from './config/database';
-import { Allocation } from './entity/allocation.entity';
-import { Driver } from './entity/driver.entity';
-import { Vehicle } from './entity/vehicle.entity';
+import { AllocationModule } from './module/allocation/allocation.module';
+import { CarModule } from './module/car/car.module';
+import { DriverModule } from './module/driver/driver.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(connection),
+    DriverModule,
+    CarModule,
+    AllocationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

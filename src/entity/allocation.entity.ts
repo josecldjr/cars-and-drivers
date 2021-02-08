@@ -1,10 +1,9 @@
-import { CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import { Driver } from "./driver.entity"
-import { Vehicle } from "./vehicle.entity"
-
+import { Car } from "./car.entity"
 
 /**
- * Allocation entity
+ * Allocation entity | Used to represent when a driver get a car
  */
 @Entity()
 export class Allocation {
@@ -12,24 +11,25 @@ export class Allocation {
     @PrimaryGeneratedColumn()
     id: number
 
-    @CreateDateColumn()
-    createdAt: Date
-    @UpdateDateColumn()
-    updatedAt: Date
-
     @DeleteDateColumn()
     deletedAt: Date
 
-    @ManyToOne(() => Vehicle, { nullable: false })
-    vehicle: Vehicle
+    @CreateDateColumn()
+    startDate: Date
 
-    @JoinColumn()
-    vehicleId: number
+    @Column({ type: 'datetime', default: null })
+    endDate: Date
 
+    @Column()
+    carId: number
+    @ManyToOne(() => Car, { nullable: false })
+    car: Car
+
+    @Column()
+    driverId: number
     @ManyToOne(() => Driver, { nullable: false })
     driver: Driver
 
-    @JoinColumn()
-    driverId: number
-
+    @Column({ type: 'varchar', length: 1000, nullable: false })
+    allocationReason: string
 }

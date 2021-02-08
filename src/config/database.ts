@@ -1,8 +1,8 @@
 import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
 import { Allocation } from "../entity/allocation.entity";
+import { Car } from "../entity/car.entity";
 import { Driver } from "../entity/driver.entity";
-import { Vehicle } from "../entity/vehicle.entity";
-import { databaseHost, databaseUser, databasePassword, databaseName, databasePort, appEnviromentStage } from "./env-vars";
+import { appEnviromentStage, databaseHost, databaseName, databasePassword, databasePort, databaseUser } from "./env-vars";
 
 export const connection: MysqlConnectionOptions = {
     type: 'mysql',
@@ -12,7 +12,7 @@ export const connection: MysqlConnectionOptions = {
     database: databaseName,
     port: databasePort,
     synchronize: true,
-    entities: [Vehicle, Driver, Allocation],
+    entities: [Car, Driver, Allocation],
     logging: (appEnviromentStage === 'dev'),
     cache: true,
 }

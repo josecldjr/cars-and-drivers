@@ -4,7 +4,7 @@ import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedCol
  * Vehicle Entity
  */
 @Entity()
-export class Vehicle {
+export class Car {
 
     @PrimaryGeneratedColumn('increment')
     id: number
@@ -18,13 +18,13 @@ export class Vehicle {
     @DeleteDateColumn()
     deletedAt: Date
 
-    @Column({ type: 'varchar', length: 20, nullable: false })
+    @Column({ type: 'varchar', length: 8, nullable: false, unique: true })
     licencePlate: string
 
     @Column({ type: 'varchar', length: 20 })
     color: string
 
-    @Column({ type: 'varchar', length: 20 })
+    @Column({ type: 'varchar', length: 30 })
     brand: string
 
     @Column({ type: 'boolean', default: true })

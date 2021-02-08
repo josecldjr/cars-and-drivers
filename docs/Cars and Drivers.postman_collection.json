@@ -1,0 +1,508 @@
+{
+	"id": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+	"name": "Cars and Drivers",
+	"description": "",
+	"order": [
+		"32b3fdd1-4161-1e27-a47c-3112e6f75f9d",
+		"a847ac07-3d62-d8a3-9c7e-b3256d22bd34",
+		"d070481a-ac67-000e-0ddc-3a5942b95897",
+		"0ea98d98-2e13-4816-f0fa-7cf19d03199f",
+		"d95fd60f-774a-940f-1136-0876791c6375",
+		"303bea7f-7560-e291-4698-97d0326be310",
+		"5363f304-d309-a380-6f54-fd35e70d6e0d",
+		"677462dd-00fd-250f-22df-b4e151a65068",
+		"2f187286-1f40-4ec0-28a1-91a925b0990f",
+		"bc6c4270-5174-7dd4-8688-396f43b94a80",
+		"4d170c53-d635-528f-d3e0-3efd69d3ee3c",
+		"eecf9b6e-cfc5-881a-d262-9ed72035cb00"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1612472969693,
+	"owner": "2090744",
+	"public": false,
+	"requests": [
+		{
+			"id": "0ea98d98-2e13-4816-f0fa-7cf19d03199f",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/driver/18",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612483281206,
+			"name": "User -> Delete",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"Dom juaum\"\n}"
+		},
+		{
+			"id": "2f187286-1f40-4ec0-28a1-91a925b0990f",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/car/1",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612571193464,
+			"name": "Car -> Delete",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"licencePlate\": \"DDD@D@@\",\n\t\"color\": \"Blue\",\n\t\"brand\": \"Fiat uno\"\n}"
+		},
+		{
+			"id": "303bea7f-7560-e291-4698-97d0326be310",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/car",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612571197506,
+			"name": "Car -> Create",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"licencePlate\": \"32sddS@\",\n\t\"color\": \"Blue\",\n\t\"brand\": \"Fiat uno\"\n}"
+		},
+		{
+			"id": "32b3fdd1-4161-1e27-a47c-3112e6f75f9d",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/driver",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612481601321,
+			"name": "User -> Create",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"Dom pppp\"\n}"
+		},
+		{
+			"id": "4d170c53-d635-528f-d3e0-3efd69d3ee3c",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/allocation/?carId=17",
+			"queryParams": [
+				{
+					"key": "activeOnly",
+					"value": "true",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "driverId",
+					"value": "20",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "carId",
+					"value": "17",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "pageSize",
+					"value": "5",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612640351448,
+			"name": "Allocation -> search",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"carId\": 2,\n\t\"driverId\": 16,\n\t\"observation\": \"pq eu quero askd pasd askpdo kaspo daso d\"\n}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+		},
+		{
+			"id": "5363f304-d309-a380-6f54-fd35e70d6e0d",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/car/2",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612571195443,
+			"name": "Car -> Update",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"licencePlate\": \"DDD2D@@\",\n\t\"color\": \"Blue\",\n\t\"brand\": \"Celtinha\"\n}"
+		},
+		{
+			"id": "677462dd-00fd-250f-22df-b4e151a65068",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/car",
+			"queryParams": [
+				{
+					"key": "color",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "brand",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "licencePlate",
+					"value": "@",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612571196281,
+			"name": "Car -> Search",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"licencePlate\": \"DDD@D@@\",\n\t\"color\": \"Blue\",\n\t\"brand\": \"Fiat uno\"\n}"
+		},
+		{
+			"id": "a847ac07-3d62-d8a3-9c7e-b3256d22bd34",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/driver/22",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612556180632,
+			"name": "User -> Update",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"Dom juaum\"\n}"
+		},
+		{
+			"id": "bc6c4270-5174-7dd4-8688-396f43b94a80",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/allocation/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612624865722,
+			"name": "Allocation -> allocate car",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"carId\": 2,\n\t\"driverId\": 16,\n\t\"observation\": \"pq eu quero askd pasd askpdo kaspo daso d\"\n}"
+		},
+		{
+			"id": "d070481a-ac67-000e-0ddc-3a5942b95897",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/driver/?page=1&pageSize=6",
+			"queryParams": [
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pageSize",
+					"value": "6",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "searchText",
+					"value": "g",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612571205132,
+			"name": "User -> Search",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"2\"\n}"
+		},
+		{
+			"id": "d95fd60f-774a-940f-1136-0876791c6375",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/driver/22",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612483280091,
+			"name": "User -> Get",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"name\": \"Dom juaum\"\n}"
+		},
+		{
+			"id": "eecf9b6e-cfc5-881a-d262-9ed72035cb00",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/allocation/?carId=17",
+			"queryParams": [
+				{
+					"key": "activeOnly",
+					"value": "true",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "driverId",
+					"value": "20",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "carId",
+					"value": "17",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "page",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "pageSize",
+					"value": "5",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1612640351448,
+			"name": "Allocation -> finalize",
+			"description": "",
+			"collectionId": "663941c0-690a-3545-6b7a-6a8c857ee4af",
+			"responses": [],
+			"rawModeData": "{\n\t\"carId\": 2,\n\t\"driverId\": 16,\n\t\"observation\": \"pq eu quero askd pasd askpdo kaspo daso d\"\n}\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+		}
+	]
+}

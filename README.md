@@ -1,73 +1,72 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Carros e Motoristas
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### O que é a aplicação?
+Uma WebAPI para gerenciar carros e motoristas. Sendo uma API, ela deve ser testada com algum cliente de REST,  como por exemplo [Postman](https://www.postman.com/) ou [Insomnia](https://insomnia.rest/download/). Também é possivel desenvolver alguma aplicação front-end para consumir a API (cors já está desabilitado).
 
-## Description
+### Tecnologias
+Foram utilizadas como tecnologias principais do projeto: Nodejs, Typescript, Nestjs(framework baseado no express), MySQL, Docker e Docker Compose. E é claro, para os testes Jest. 
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Também vale informar que foi desenvolvido no Ubuntu ,VSCODE e Postman.
 
-## Installation
+### Iniciando e configurando o projeto
 
-```bash
-$ npm install
-```
+#### Com docker:
 
-## Running the app
+> (Espera-se que você já tenha o docker instalado em sua máquina)
 
-```bash
-# development
-$ npm run start
+Abra o prompt de comando ou terminal na pasta raiz do projeto e execute os comandos:
 
-# watch mode
-$ npm run start:dev
+Para criar os containers da API e banco:
+   
 
-# production mode
-$ npm run start:prod
-```
+     docker-compose up -d
 
-## Test
+Logo em seguida, para utilizar o bash do lado de dentro do container:
 
-```bash
-# unit tests
-$ npm run test
+    docker exec -it app-cars-api bash
 
-# e2e tests
-$ npm run test:e2e
+Após isso, para instalar os pacotes node:
 
-# test coverage
-$ npm run test:cov
-```
+`npm install`
+E finalmente para iniciar a aplicação: 
 
-## Support
+    npm run start 
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+ou
 
-## Stay in touch
+    npm run start:dev
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Pronto!  A aplicação está sendo inteiramente executada dentro do docker.
 
-## License
+Obs: Caso precise alterar alguma configuração do projeto, abra o arquivo docker-compose.yaml e vá para a linha 20. As variáveis de ambiente da aplicação estão entre as linhas 21 e 27. 
 
-Nest is [MIT licensed](LICENSE).
+#### Sem docker:
+
+> Espera-se que você já tenha o nodejs instalado em sua máquina, e também uma instância de banco MySQL
+
+Primeiramente configure as seguintes variáveis de ambiente em sua máquina:
+- PORT / Porta da API (recomendável a 3000)
+- DATABASE_HOST  / Host do Mysql
+- DATABASE_NAME / Nome da base de dados
+- DATABASE_USER / Nome do usuário
+- DATABASE_PASSWORD / Senha do usuário
+- DATABASE_PORT / Porta do banco
+
+Após isso, vá até a pasta raiz do projeto e digite:
+
+    npm run install
+
+Logo em seguida:
+
+    npm run start
+
+ou 
+
+    npm run start:dev
+
+
+ Finalizando isso, a aplicação estará funcionando.
+ Os endpoints estarão disponíveis em [endpoints.md](./endpoints.md)
+Qualquer dúvida ou dificuldade, entre em contato pelo email.
+Obrigado.
